@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IB164 Interactive Demos</title>
+<meta name="description" content="Interactive browser-based demos for IB164. Nothing to install.">
+<link rel="icon" href="favicon.ico">
+<style>
+  :root {
+    --bg: #fbfaf8;
+    --surface: #ffffff;
+    --border: #e4e0d8;
+    --text: #23201c;
+    --muted: #625c53;
+    --accent: #6b4f9e;
+    --accent-soft: #f1ecf9;
+    --shadow: 0 1px 2px rgba(35,32,28,.05), 0 4px 14px rgba(35,32,28,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17161a;
+      --surface: #201f25;
+      --border: #333039;
+      --text: #ece9f0;
+      --muted: #a8a2b0;
+      --accent: #b9a0ea;
+      --accent-soft: #2b2536;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
+    }
+    :root:not([data-theme="light"]) .lab-tag { color: #17161a; }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17161a; --surface: #201f25; --border: #333039;
+    --text: #ece9f0; --muted: #a8a2b0; --accent: #b9a0ea;
+    --accent-soft: #2b2536;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
+  }
+  :root[data-theme="dark"] .lab-tag { color: #17161a; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+          Roboto, Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 48px 16px 72px; }
+  header { margin-bottom: 32px; }
+  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 6px; letter-spacing: -.02em; }
+  .sub { color: var(--muted); margin: 0; }
+  .note {
+    margin: 28px 0 40px;
+    padding: 16px 18px;
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 10px;
+  }
+  .note p { margin: 0; }
+  .note p + p { margin-top: 10px; color: var(--muted); font-size: .92rem; }
+  .lab {
+    margin-bottom: 14px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .lab summary {
+    display: flex; align-items: center; gap: 11px; flex-wrap: wrap;
+    padding: 16px 18px; cursor: pointer; font-weight: 600;
+    color: var(--text); list-style: none; user-select: none;
+  }
+  /* Replace the native triangle with our own chevron, both engines. */
+  .lab summary::-webkit-details-marker { display: none; }
+  .lab summary::marker { content: ""; }
+  .lab summary::after {
+    content: ""; margin-left: auto; width: 8px; height: 8px;
+    border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+    transform: rotate(45deg) translate(-2px, -2px);
+    transition: transform .2s; flex: none;
+  }
+  .lab[open] summary::after {
+    transform: rotate(225deg) translate(-2px, -2px);
+  }
+  .lab summary:hover { background: var(--accent-soft); }
+  .lab summary:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: -2px;
+  }
+  .lab-name { font-size: 1.02rem; }
+  .lab-count {
+    font-size: .8rem; font-weight: 500; color: var(--muted);
+  }
+  .lab[open] summary { border-bottom: 1px solid var(--border); }
+  .lab .cards { padding: 16px 18px 18px; }
+  .lab-tag {
+    background: var(--accent); color: #fff; font-size: .74rem;
+    letter-spacing: .06em; text-transform: uppercase; font-weight: 700;
+    padding: 3px 9px; border-radius: 999px; flex: none;
+  }
+  .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .card a {
+    display: block; padding: 16px 18px; background: var(--bg);
+    border: 1px solid var(--border); border-radius: 10px;
+    text-decoration: none; color: inherit;
+    transition: border-color .15s, transform .15s;
+  }
+  .card a:hover, .card a:focus-visible {
+    border-color: var(--accent); transform: translateY(-1px);
+  }
+  .card a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .card h3 {
+    margin: 0 0 5px; font-size: 1.06rem; color: var(--accent);
+    display: flex; align-items: center; gap: 9px; flex-wrap: wrap;
+  }
+  .card p { margin: 0; color: var(--muted); font-size: .93rem; }
+  .slow {
+    font-size: .68rem; text-transform: uppercase; letter-spacing: .05em;
+    font-weight: 700; color: var(--muted); background: var(--bg);
+    border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px;
+  }
+  footer {
+    margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+    color: var(--muted); font-size: .88rem;
+  }
+  footer p { margin: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    .card a { transition: none; }
+    .card a:hover, .card a:focus-visible { transform: none; }
+    .lab summary::after { transition: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>IB164 Interactive Demos</h1>
+      <p class="sub">Choose a lab below to see its demos. Each one runs in
+      your browser.</p>
+    </header>
+
+      <details class="lab">
+        <summary>
+          <span class="lab-tag">Lab 4</span>
+          <span class="lab-name">Evolution in Action</span>
+          <span class="lab-count">3 demos</span>
+        </summary>
+        <ul class="cards">
+        <li class="card">
+          <a href="peppered_moth.html">
+            <h3>The Peppered Moth, and the Cost of Being Late</h3>
+            <p>Industrial melanism as selection in real time, and what happens when a population responds too slowly.</p>
+          </a>
+        </li>
+        <li class="card">
+          <a href="helminth_mismatch.html">
+            <h3>The Parasite That Isn&#x27;t There Any More</h3>
+            <p>Evolutionary mismatch: an immune system tuned for parasites that modern life has removed.</p>
+          </a>
+        </li>
+        <li class="card">
+          <a href="ccr5_cryptic_variation.html">
+            <h3>The Variation You Cannot See</h3>
+            <p>Cryptic genetic variation at CCR5 — diversity that is invisible until the environment changes.</p>
+          </a>
+        </li>
+        </ul>
+      </details>
+      <details class="lab">
+        <summary>
+          <span class="lab-tag">Lab 2</span>
+          <span class="lab-name">Probability and Intuition</span>
+          <span class="lab-count">1 demo</span>
+        </summary>
+        <ul class="cards">
+        <li class="card">
+          <a href="monty_hall.html">
+            <h3>Let&#x27;s Make a Deal</h3>
+            <p>The Monty Hall problem. Play it, then simulate it, and see why switching wins two times in three.</p>
+          </a>
+        </li>
+        </ul>
+      </details>
+      <details class="lab">
+        <summary>
+          <span class="lab-tag">Lab 1</span>
+          <span class="lab-name">Probability and Inference</span>
+          <span class="lab-count">2 demos</span>
+        </summary>
+        <ul class="cards">
+        <li class="card">
+          <a href="binomial_distribution.html">
+            <h3>The Binomial Distribution<span class="slow" title="Loads scipy as well, so the first start takes a little longer">slower first load</span></h3>
+            <p>How the shape of the binomial changes with the number of trials and the probability of success.</p>
+          </a>
+        </li>
+        <li class="card">
+          <a href="binomial_hypothesis_separation.html">
+            <h3>Distinguishing Close Hypotheses<span class="slow" title="Loads scipy as well, so the first start takes a little longer">slower first load</span></h3>
+            <p>Why telling two similar hypotheses apart takes a larger sample than you might expect — the power of sample size.</p>
+          </a>
+        </li>
+        </ul>
+      </details>
+
+    <footer>
+      <p>If a demo does not load, refresh the page once and check that you are
+      connected to the internet.</p>
+    </footer>
+  </div>
+</body>
+</html>

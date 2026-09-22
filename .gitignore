@@ -1,0 +1,19 @@
+# Lab 3 GWAS summary statistics — several GB each, far over GitHub's 100 MB
+# per-file limit. These must never be committed.
+*.tsv.bgz
+lab3/
+
+# Generated marimo WASM exports. Each carries its own ~26 MB copy of the same
+# assets/ bundle (~189 MB in total). build_site.py deduplicates them into
+# docs/, which IS committed, so committing these as well would be ~189 MB of
+# redundant data. Rebuild any of them with:
+#   py -3.10 -m marimo export html-wasm <notebook>.py -o <export dir> --mode run
+lab*/_*_app/
+
+# docs/ is the built site GitHub Pages serves — deliberately NOT ignored.
+
+# Machine-local Claude Code tool permissions - not useful to anyone else.
+.claude/settings.local.json
+
+__pycache__/
+*.pyc
