@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-CZceb_kH.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-Bam3NpBI.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-C_DwAp7Z.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-CEsLFVD9.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-D5MAsWEG.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-C6PDArdf.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>coalescent</title>
+    <script type="module" crossorigin src="./assets/index-DCq7udug.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-BFv3hW2s.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-LvLJmgfZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-Bj1aDYRI.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-B3qBwwSJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-BqBOg78p.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-BR0C1MaI.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-D_rSvXvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BMPhtTJQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-C92Rrpmf.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-CRZ52CKf.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DVodi8oQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-Dz_KRrWq.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-DCUzRj2J.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-IqsYSyWB.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-D9nb17Rw.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-CSu739Rf.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-BDxedMYP.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CwUpDHG7.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BoOh2kN5.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-D5guW7EU.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-BH35Ndha.js">
+    <link rel="modulepreload" crossorigin href="./assets/x-C-6liIBr.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-5i7URBEn.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-Gcwqb_SK.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-PYIpV284.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-D91BmmQi.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-BUdrueMv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isObject-DvLSfCY5.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFor-DKD1r8uL.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-_9WLTEyt.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-H_cgTO0M.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-DIGrmLDO.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Bk0r4KDZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-CCkGk34L.js">
+    <link rel="modulepreload" crossorigin href="./assets/DeferredRequestRegistry-C2V-hXrK.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-DMpttj8Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-DdhIEena.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-Calf6e81.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-DIwGYs0l.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DieWOfXE.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-DfoVjkkH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-AmxLvSQ5.js">
+    <link rel="modulepreload" crossorigin href="./assets/arrays-DYDL-3-i.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-md4mFbOQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-DRroIaBz.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-C_FLIcjP.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-1ePoj7v6.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-DsQUzvvb.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BrR4M-k3.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-HlsDto3K.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CHcznzB-.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-idZNafp8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DfWgLTCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-G3xLh7ZX.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BwejP-9J.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Dg3CCt0r.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-C9ZB41s2.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex--zUcZkER.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-B5A0DFEz.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-Cg0r2qW-.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-BRGiG41H.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-BT6B8Bon.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-CsYTPAhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-DhnxH9Rh.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-kIkTfzTX.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-B0OX4z33.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BA9ZN5Xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-DzYV_VeY.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-DSY6_TYl.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-BHZ1EjqC.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-BGBdrcqJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-CqE8CV1Y.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BxKDvvzN.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-epUg4eUW.js">
+    <link rel="modulepreload" crossorigin href="./assets/SSRProvider-1sSrgJwI.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BrNoqz7t.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-D_mZTdYK.js">
+    <link rel="modulepreload" crossorigin href="./assets/usePress-Cj1lHaxt.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-2egRGOhT.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-CAFE3UV7.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-owqfXuA4.js">
+    <link rel="modulepreload" crossorigin href="./assets/multi-map-rafH3cg3.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-DD-RU0QZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-CG5QYXYk.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-D1A3cFC8.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-D-VMsA11.js">
+    <link rel="modulepreload" crossorigin href="./assets/useRunCells-cIxqHRwZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BnK_ki61.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BwrPA9zQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-D189KR4Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-aOmkRy0R.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-BZ77nRPA.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-SzKMGrBW.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-BRTQ46qC.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CUkxKVSp.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-jEqwgi_c.js">
+    <link rel="modulepreload" crossorigin href="./assets/html-to-image-BOWUS6J2.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BRfyPUhi.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BRNkjHs1.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-BYkSpfWg.js">
+    <link rel="modulepreload" crossorigin href="./assets/micromark-factory-space-8Uk-uN5W.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-5FQGJX7Z-wbiBygI_.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-renderer-3M2UXZOE.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-DQS2IzwJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-UExmgBsf.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-DVkmLSXX.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-rCRPD7IF.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CZ3rujd6.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-Bqipv_jK.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-BxlXxssi.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-CQbVJYLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-B8TXLgVt.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-KoNx_uxe.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-CtmdgiVR.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-C48Oksn0.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-q1GgI0Ag.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-UWgehH47.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-_XK-fjTQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-icons.esm-B8rtE4cC.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-6NxtGaCm.js">
+    <link rel="modulepreload" crossorigin href="./assets/ellipsis-KAhMaCIV.js">
+    <link rel="modulepreload" crossorigin href="./assets/message-circle-QFYtD-Lc.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-resizable-panels.browser.esm-xQHRvEag.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-sWUD3O5F.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-nqk474t8.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-DN3RwIjj.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-6oUobewY.js">
+    <link rel="modulepreload" crossorigin href="./assets/ellipsis-vertical-CkwWkOQL.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-BmiNHssk.js">
+    <link rel="modulepreload" crossorigin href="./assets/components-eaRIBPb2.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-BbSZl4gC.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-C66kZH_4.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-DzcyDJwQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-xtQoaf-X.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-BQlZis3f.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-CcSYdGmP.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-n1Li95bE.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-BueqiM86.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-BBLUUIbP.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-headphone-BrQspHac.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BrdxGLRX.js">
+    <link rel="modulepreload" crossorigin href="./assets/image-HpSc22eh.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-icons-CSF7UWQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-CqJGGLBT.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-CWUex2qo.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-DY_dRKpv.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-CJEPnWjm.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-CpeNXBj-.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-Tp7rARFe.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-C-qh_et5.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-CxV9N1bc.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-BFFSWzNE.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-DTR8T0AE.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-D2liylO5.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-BuMhEaS9.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-C5AzNaHr.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-BUVFJb5I.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-B-72v1dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-Dpiu3eud.js">
+    <link rel="modulepreload" crossorigin href="./assets/RSPContexts-CrATdGvz.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-D2Wc5G49.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-pHFuC8FJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-Bpx1EWqM.js">
+    <link rel="modulepreload" crossorigin href="./assets/fileToBase64-Bzn96tYq.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-D9vVr8W2.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-CjWf0wU3.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-DiS_ryrS.js">
+    <link rel="modulepreload" crossorigin href="./assets/flatten-Dl4V1ub3.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-DqWUNly1.js">
+    <link rel="modulepreload" crossorigin href="./assets/code-xml-CZN6vNxu.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-k2WwJdZy.js">
+    <link rel="modulepreload" crossorigin href="./assets/triangle-alert-CBEvAwaa.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-sq57iaa5.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-jmgGt1lS.css">
+    <link rel="stylesheet" crossorigin href="./assets/markdown-renderer-DdDKmWlR.css">
+    <link rel="stylesheet" crossorigin href="./assets/JsonOutput-B7vuddcd.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-BuOIqA8d.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.23.2%22%0Aapp%20%3D%20marimo.App(width%3D%22medium%22)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20%F0%9F%8C%B3%20The%20Coalescent%3A%20Tracing%20Genes%20Back%20in%20Time%0A%0A%20%20%20%20The%20Wright%E2%80%93Fisher%20model%20runs%20**forwards**%3A%20each%20generation%2C%20the%202N%20gene%0A%20%20%20%20copies%20are%20drawn%20at%20random%20from%20the%20copies%20in%20the%20generation%20before.%0A%20%20%20%20The%20coalescent%20runs%20the%20same%20model%20**backwards**.%0A%0A%20%20%20%20Below%2C%20every%20dot%20is%20one%20gene%20copy%20in%20today's%20population%20(generation%200).%0A%20%20%20%20**Pick%20two%20of%20them**%2C%20then%20**step%20back%20in%20time**%20one%20generation%20at%20a%0A%20%20%20%20time.%20At%20each%20step%20every%20copy%20picks%20its%20parent%20at%20random%20from%20the%0A%20%20%20%20generation%20before%20(the%20red%20lines)%2C%20and%20you%20follow%20your%20two%20copies'%0A%20%20%20%20ancestry%20(blue).%20Keep%20going%20until%20both%20land%20on%20the%20**same%20parent**%3A%0A%20%20%20%20their%20lineages%20**coalesce**%2C%20and%20that%20copy%20is%20their%20**most%20recent%0A%20%20%20%20common%20ancestor%20(MRCA)**.%0A%0A%20%20%20%20How%20many%20generations%20back%20do%20you%20have%20to%20go%3F%20Try%20it%20a%20few%20times%2C%20in%0A%20%20%20%20small%20populations%20and%20in%20larger%20ones.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(DEFAULT_N%2C%20MAX_N%2C%20mo)%3A%0A%20%20%20%20%23%20Small%20on%20purpose%3A%20every%20gene%20copy%20of%20every%20generation%20is%20drawn%2C%20so%202N%0A%20%20%20%20%23%20has%20to%20stay%20countable.%20Linear%20with%20an%20editable%20box%2C%20as%20in%20the%0A%20%20%20%20%23%20Wright-Fisher%20demo.%0A%20%20%20%20n_slider%20%3D%20mo.ui.slider(%0A%20%20%20%20%20%20%20%20start%3D1%2C%0A%20%20%20%20%20%20%20%20stop%3DMAX_N%2C%0A%20%20%20%20%20%20%20%20step%3D1%2C%0A%20%20%20%20%20%20%20%20value%3DDEFAULT_N%2C%0A%20%20%20%20%20%20%20%20include_input%3DTrue%2C%0A%20%20%20%20%20%20%20%20label%3D%22Population%20size%20**N**%20(individuals%3B%202N%20gene%20copies)%22%2C%0A%20%20%20%20)%0A%20%20%20%20n_slider%0A%20%20%20%20return%20(n_slider%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo%2C%20n_slider)%3A%0A%20%20%20%20%23%20Recreated%20(and%20so%20cleared)%20whenever%20N%20changes%2C%20because%20the%20copies%20on%0A%20%20%20%20%23%20offer%20change.%20Numbers%20match%20the%20labels%20on%20the%20top%20row%20of%20the%20plot.%0A%20%20%20%20picker%20%3D%20mo.ui.multiselect(%0A%20%20%20%20%20%20%20%20options%3D%7Bf%22copy%20%7Bi%20%2B%201%7D%22%3A%20i%20for%20i%20in%20range(2%20*%20n_slider.value)%7D%2C%0A%20%20%20%20%20%20%20%20max_selections%3D2%2C%0A%20%20%20%20%20%20%20%20label%3D%22Pick%20**two**%20gene%20copies%20from%20today%20to%20follow%20back%20in%20time%22%2C%0A%20%20%20%20)%0A%20%20%20%20picker%0A%20%20%20%20return%20(picker%2C)%0A%0A%0A%40app.cell%0Adef%20_(fresh_trace%2C%20n_slider%2C%20picker%2C%20set_coal)%3A%0A%20%20%20%20%23%20A%20new%20N%20or%20a%20new%20pair%20starts%20a%20fresh%20trace%20from%20generation%200.%0A%20%20%20%20set_coal(fresh_trace(n_slider.value%2C%20picker.value))%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(DEFAULT_N%2C%20mo%2C%20rng)%3A%0A%20%20%20%20def%20fresh_trace(n_pop%2C%20picks)%3A%0A%20%20%20%20%20%20%20%20picks%20%3D%20sorted(picks%20or%20%5B%5D)%0A%20%20%20%20%20%20%20%20return%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22n%22%3A%20n_pop%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20The%20two%20copies%20being%20followed%2C%20or%20fewer%20while%20still%20picking.%0A%20%20%20%20%20%20%20%20%20%20%20%20%22picks%22%3A%20picks%20if%20len(picks)%20%3D%3D%202%20else%20picks%5B%3A1%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20parents%5Bg%5D%5Bi%5D%3A%20the%20copy%20in%20generation%20g%2B1%20(one%20further%20back)%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20that%20copy%20i%20of%20generation%20g%20came%20from.%20Grows%20one%20row%20per%20step.%0A%20%20%20%20%20%20%20%20%20%20%20%20%22parents%22%3A%20%5B%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Generations%20back%20at%20which%20the%20two%20lineages%20met%2C%20once%20they%20have.%0A%20%20%20%20%20%20%20%20%20%20%20%20%22met_at%22%3A%20None%2C%0A%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20def%20lineage_positions(state)%3A%0A%20%20%20%20%20%20%20%20%23%20Where%20the%20two%20followed%20lineages%20are%20in%20the%20oldest%20row%20drawn.%0A%20%20%20%20%20%20%20%20a%2C%20b%20%3D%20state%5B%22picks%22%5D%0A%20%20%20%20%20%20%20%20for%20row%20in%20state%5B%22parents%22%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20a%2C%20b%20%3D%20row%5Ba%5D%2C%20row%5Bb%5D%0A%20%20%20%20%20%20%20%20return%20a%2C%20b%0A%0A%20%20%20%20def%20step_back(state)%3A%0A%20%20%20%20%20%20%20%20%23%20One%20generation%20further%20into%20the%20past%3A%20EVERY%20copy%20in%20the%20current%0A%20%20%20%20%20%20%20%20%23%20oldest%20row%20picks%20a%20parent%20uniformly%20from%20the%202N%20copies%20before%20it%2C%0A%20%20%20%20%20%20%20%20%23%20exactly%20the%20Wright-Fisher%20model.%20The%20draw%20happens%20here%2C%20inside%20the%0A%20%20%20%20%20%20%20%20%23%20click's%20state%20update%2C%20and%20is%20frozen%20into%20state%20--%20drawing%20in%20a%0A%20%20%20%20%20%20%20%20%23%20render%20cell%20would%20re-roll%20on%20every%20re-render.%20A%20no-op%20until%20two%0A%20%20%20%20%20%20%20%20%23%20copies%20are%20picked%2C%20and%20once%20the%20lineages%20have%20met.%0A%20%20%20%20%20%20%20%20if%20len(state%5B%22picks%22%5D)%20!%3D%202%20or%20state%5B%22met_at%22%5D%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20state%0A%20%20%20%20%20%20%20%20two_n%20%3D%202%20*%20state%5B%22n%22%5D%0A%20%20%20%20%20%20%20%20parents%20%3D%20state%5B%22parents%22%5D%20%2B%20%5Brng.integers(two_n%2C%20size%3Dtwo_n).tolist()%5D%0A%20%20%20%20%20%20%20%20new%20%3D%20%7B**state%2C%20%22parents%22%3A%20parents%7D%0A%20%20%20%20%20%20%20%20a%2C%20b%20%3D%20lineage_positions(new)%0A%20%20%20%20%20%20%20%20if%20a%20%3D%3D%20b%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20new%5B%22met_at%22%5D%20%3D%20len(parents)%0A%20%20%20%20%20%20%20%20return%20new%0A%0A%20%20%20%20get_coal%2C%20set_coal%20%3D%20mo.state(fresh_trace(DEFAULT_N%2C%20%5B%5D))%0A%20%20%20%20return%20fresh_trace%2C%20get_coal%2C%20lineage_positions%2C%20set_coal%2C%20step_back%0A%0A%0A%40app.cell%0Adef%20_(fresh_trace%2C%20set_coal%2C%20step_back)%3A%0A%20%20%20%20%23%20Functional%20updates%2C%20so%20a%20click%20always%20acts%20on%20the%20freshest%20state.%0A%20%20%20%20def%20on_step()%3A%0A%20%20%20%20%20%20%20%20set_coal(step_back)%0A%0A%20%20%20%20def%20on_restart()%3A%0A%20%20%20%20%20%20%20%20%23%20Same%20population%20size%20and%20same%20two%20copies%2C%20new%20random%20history.%0A%20%20%20%20%20%20%20%20set_coal(lambda%20s%3A%20fresh_trace(s%5B%22n%22%5D%2C%20s%5B%22picks%22%5D))%0A%0A%20%20%20%20return%20on_restart%2C%20on_step%0A%0A%0A%40app.cell%0Adef%20_(mo%2C%20on_restart%2C%20on_step)%3A%0A%20%20%20%20%23%20This%20cell%20must%20NOT%20read%20the%20trace%20state%3A%20re-running%20a%20cell%20that%0A%20%20%20%20%23%20creates%20a%20UI%20element%20resets%20it%2C%20so%20if%20these%20buttons%20depended%20on%20the%0A%20%20%20%20%23%20state%20they%20would%20be%20rebuilt%20on%20every%20click.%0A%20%20%20%20step_button%20%3D%20mo.ui.button(%0A%20%20%20%20%20%20%20%20label%3D%22%E2%AC%87%20Back%20one%20generation%22%2C%0A%20%20%20%20%20%20%20%20kind%3D%22success%22%2C%0A%20%20%20%20%20%20%20%20on_change%3Dlambda%20v%3A%20on_step()%2C%0A%20%20%20%20)%0A%20%20%20%20restart_button%20%3D%20mo.ui.button(%0A%20%20%20%20%20%20%20%20label%3D%22%E2%86%BA%20Start%20over%20(same%20two%20copies)%22%2C%0A%20%20%20%20%20%20%20%20kind%3D%22neutral%22%2C%0A%20%20%20%20%20%20%20%20on_change%3Dlambda%20v%3A%20on_restart()%2C%0A%20%20%20%20)%0A%20%20%20%20mo.hstack(%5Bstep_button%2C%20restart_button%5D%2C%20justify%3D%22start%22%2C%20gap%3D1%2C%20wrap%3DTrue)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(get_coal%2C%20lineage_positions%2C%20mo)%3A%0A%20%20%20%20_s%20%3D%20get_coal()%0A%20%20%20%20_gen%20%3D%20len(_s%5B%22parents%22%5D)%0A%20%20%20%20_picks%20%3D%20_s%5B%22picks%22%5D%0A%0A%20%20%20%20if%20len(_picks)%20%3C%202%3A%0A%20%20%20%20%20%20%20%20_following%20%3D%20%22%E2%80%93%22%0A%20%20%20%20%20%20%20%20_following_sub%20%3D%20%22pick%20two%20copies%20above%22%0A%20%20%20%20%20%20%20%20_status%2C%20_status_colour%20%3D%20%22Waiting%22%2C%20%22%237a7382%22%0A%20%20%20%20%20%20%20%20_status_sub%20%3D%20%22choose%20two%20copies%20to%20start%22%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20_following%20%3D%20f%22%7B_picks%5B0%5D%20%2B%201%7D%20%26%20%7B_picks%5B1%5D%20%2B%201%7D%22%0A%20%20%20%20%20%20%20%20_following_sub%20%3D%20%22gene%20copies%20from%20generation%200%22%0A%20%20%20%20%20%20%20%20if%20_s%5B%22met_at%22%5D%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20_status%2C%20_status_colour%20%3D%20%22Coalesced!%22%2C%20%22%233B7BBF%22%0A%20%20%20%20%20%20%20%20%20%20%20%20_status_sub%20%3D%20(f%22their%20common%20ancestor%20lived%20%7B_s%5B'met_at'%5D%7D%20%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20f%22generation%7B's'%20if%20_s%5B'met_at'%5D%20!%3D%201%20else%20''%7D%20ago%22)%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20_a%2C%20_b%20%3D%20lineage_positions(_s)%0A%20%20%20%20%20%20%20%20%20%20%20%20_status%2C%20_status_colour%20%3D%20%22Two%20lineages%22%2C%20%22%23D6404A%22%0A%20%20%20%20%20%20%20%20%20%20%20%20_status_sub%20%3D%20(f%22now%20copies%20%7B_a%20%2B%201%7D%20and%20%7B_b%20%2B%201%7D%20of%20generation%20%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20f%22%E2%88%92%7B_gen%7D%3B%20keep%20going%20back%22)%0A%0A%20%20%20%20mo.Html(f%22%22%22%0A%20%20%20%20%3Cstyle%3E%0A%20%20%20%20.co-cards%20%7B%7B%0A%20%20%20%20%20%20%20%20display%3A%20flex%3B%20gap%3A%200.8rem%3B%20flex-wrap%3A%20wrap%3B%0A%20%20%20%20%20%20%20%20padding%3A%200.4rem%200%200.2rem%200%3B%0A%20%20%20%20%7D%7D%0A%20%20%20%20.co-card%20%7B%7B%0A%20%20%20%20%20%20%20%20flex%3A%201%201%20150px%3B%20border-radius%3A%2012px%3B%20padding%3A%200.75rem%200.7rem%3B%0A%20%20%20%20%20%20%20%20text-align%3A%20center%3B%20font-family%3A%20system-ui%2C%20sans-serif%3B%0A%20%20%20%20%20%20%20%20border%3A%202px%20solid%20%23d9d4cc%3B%20background%3A%20%23fbfaf8%3B%0A%20%20%20%20%7D%7D%0A%20%20%20%20.co-card-title%20%7B%7B%0A%20%20%20%20%20%20%20%20font-size%3A%200.74rem%3B%20font-weight%3A%20800%3B%20text-transform%3A%20uppercase%3B%0A%20%20%20%20%20%20%20%20letter-spacing%3A%200.09em%3B%20color%3A%20%237a7382%3B%0A%20%20%20%20%7D%7D%0A%20%20%20%20.co-card-val%20%7B%7B%20font-size%3A%202.1rem%3B%20font-weight%3A%20800%3B%20line-height%3A%201.2%3B%20color%3A%20%2333302c%3B%20%7D%7D%0A%20%20%20%20.co-card-sub%20%7B%7B%20font-size%3A%200.8rem%3B%20color%3A%20%237a7382%3B%20%7D%7D%0A%20%20%20%20%3C%2Fstyle%3E%0A%20%20%20%20%3Cdiv%20class%3D%22co-cards%22%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22co-card%22%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22co-card-title%22%3EFollowing%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22co-card-val%22%3E%7B_following%7D%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22co-card-sub%22%3E%7B_following_sub%7D%3C%2Fdiv%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22co-card%22%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22co-card-title%22%3EGenerations%20back%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22co-card-val%22%3E%7B_gen%7D%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22co-card-sub%22%3EN%20%3D%20%7B_s%5B%22n%22%5D%7D%20%26middot%3B%202N%20%3D%20%7B2%20*%20_s%5B%22n%22%5D%7D%20gene%20copies%3C%2Fdiv%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22co-card%22%20style%3D%22border-color%3A%7B_status_colour%7D%22%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22co-card-title%22%3EStatus%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22co-card-val%22%20style%3D%22color%3A%7B_status_colour%7D%3B%20font-size%3A1.6rem%3B%20padding%3A0.15rem%200%22%3E%7B_status%7D%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22co-card-sub%22%3E%7B_status_sub%7D%3C%2Fdiv%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(MIN_ROWS%2C%20get_coal%2C%20plt)%3A%0A%20%20%20%20_s%20%3D%20get_coal()%0A%20%20%20%20_parents%20%3D%20_s%5B%22parents%22%5D%0A%20%20%20%20_two_n%20%3D%202%20*%20_s%5B%22n%22%5D%0A%20%20%20%20_depth%20%3D%20len(_parents)%0A%20%20%20%20_picks%20%3D%20_s%5B%22picks%22%5D%0A%20%20%20%20_met%20%3D%20_s%5B%22met_at%22%5D%20is%20not%20None%0A%20%20%20%20_red%2C%20_blue%2C%20_grey%20%3D%20%22%23D6404A%22%2C%20%22%233B7BBF%22%2C%20%22%239a938a%22%0A%0A%20%20%20%20%23%20Copies%20on%20the%20followed%20lineages%2C%20row%20by%20row.%20Once%20the%20two%20meet%20they%0A%20%20%20%20%23%20share%20a%20copy%2C%20so%20use%20sets.%0A%20%20%20%20_on_path%20%3D%20%5Bset(_picks)%5D%0A%20%20%20%20for%20_g%20in%20range(_depth)%3A%0A%20%20%20%20%20%20%20%20_on_path.append(%7B_parents%5B_g%5D%5B_i%5D%20for%20_i%20in%20_on_path%5B_g%5D%7D)%0A%0A%20%20%20%20%23%20Fixed%20vertical%20room%20for%20MIN_ROWS%20generations%20so%20the%20plot%20does%20not%0A%20%20%20%20%23%20rescale%20on%20every%20step%3B%20it%20extends%20only%20when%20the%20trace%20goes%20deeper.%0A%20%20%20%20_rows%20%3D%20max(_depth%2C%20MIN_ROWS)%0A%20%20%20%20_crowd%20%3D%20max(_two_n%2C%20_rows%20%2F%202)%0A%20%20%20%20_dot%20%3D%20max(1.5%2C%20min(3.5%2C%2040%20%2F%20_crowd))%0A%20%20%20%20_thin%20%3D%20max(0.4%2C%20min(0.9%2C%2010%20%2F%20_crowd))%0A%20%20%20%20_thick%20%3D%20max(1.4%2C%20min(2.4%2C%2025%20%2F%20_crowd))%0A%0A%20%20%20%20_fig%2C%20_axes%20%3D%20plt.subplots(1%2C%203%2C%20figsize%3D(10%2C%205.6)%2C%20sharey%3DTrue)%0A%0A%20%20%20%20def%20_draw_genealogy(ax%2C%20xpos)%3A%0A%20%20%20%20%20%20%20%20%23%20Red%3A%20every%20parent%20link%20in%20the%20population.%20Blue%3A%20the%20followed%0A%20%20%20%20%20%20%20%20%23%20lineages%2C%20drawn%20on%20top.%0A%20%20%20%20%20%20%20%20for%20_g%20in%20range(_depth)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20_i%20in%20range(_two_n)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_is_blue%20%3D%20_i%20in%20_on_path%5B_g%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ax.plot(%5Bxpos(_g%2C%20_i)%2C%20xpos(_g%20%2B%201%2C%20_parents%5B_g%5D%5B_i%5D)%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5B-_g%2C%20-_g%20-%201%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20color%3D_blue%20if%20_is_blue%20else%20_red%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20linewidth%3D_thick%20if%20_is_blue%20else%20_thin%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zorder%3D3%20if%20_is_blue%20else%202)%0A%20%20%20%20%20%20%20%20for%20_g%20in%20range(_depth%20%2B%201)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20ax.plot(%5Bxpos(_g%2C%20_i)%20for%20_i%20in%20range(_two_n)%5D%2C%20%5B-_g%5D%20*%20_two_n%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22o%22%2C%20color%3D_red%20if%20_picks%20else%20_grey%2C%20markersize%3D_dot%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zorder%3D2)%0A%20%20%20%20%20%20%20%20%20%20%20%20ax.plot(%5Bxpos(_g%2C%20_i)%20for%20_i%20in%20_on_path%5B_g%5D%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5B-_g%5D%20*%20len(_on_path%5B_g%5D)%2C%20%22o%22%2C%20color%3D_blue%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20markersize%3D_dot%20*%201.6%2C%20zorder%3D4)%0A%0A%20%20%20%20%23%20Panel%201%3A%20the%20genealogy%20as%20it%20is%20built%2C%20step%20by%20step.%20The%20top%20row%20is%0A%20%20%20%20%23%20numbered%20to%20match%20the%20picker.%0A%20%20%20%20_ax%20%3D%20_axes%5B0%5D%0A%20%20%20%20_draw_genealogy(_ax%2C%20lambda%20g%2C%20i%3A%20i)%0A%20%20%20%20for%20_i%20in%20range(_two_n)%3A%0A%20%20%20%20%20%20%20%20_ax.annotate(str(_i%20%2B%201)%2C%20(_i%2C%200)%2C%20xytext%3D(0%2C%207)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20textcoords%3D%22offset%20points%22%2C%20ha%3D%22center%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20fontsize%3D8%20if%20_two_n%20%3C%3D%2012%20else%206%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20color%3D_blue%20if%20_i%20in%20_picks%20else%20%22%2333302c%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20fontweight%3D%22bold%22%20if%20_i%20in%20_picks%20else%20%22normal%22)%0A%20%20%20%20if%20_met%3A%0A%20%20%20%20%20%20%20%20_mrca%20%3D%20next(iter(_on_path%5B_depth%5D))%0A%20%20%20%20%20%20%20%20_ax.plot(_mrca%2C%20-_depth%2C%20%22o%22%2C%20color%3D%22%2333302c%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20markersize%3D_dot%20*%202.2%2C%20zorder%3D5)%0A%20%20%20%20_ax.set_title(%22genealogy%22%2C%20pad%3D14)%0A%0A%20%20%20%20if%20_met%3A%0A%20%20%20%20%20%20%20%20%23%20Panel%202%3A%20sorted%20genealogy.%20Keep%20the%20oldest%20row%20as%20is%2C%20then%20place%0A%20%20%20%20%20%20%20%20%23%20each%20younger%20row%20in%20order%20of%20its%20parents'%20places%20(ties%20by%20original%0A%20%20%20%20%20%20%20%20%23%20order)%3A%20siblings%20sit%20together%20and%20no%20two%20lines%20cross.%20Shown%20only%0A%20%20%20%20%20%20%20%20%23%20at%20the%20end%2C%20since%20every%20new%20row%20would%20reshuffle%20the%20whole%20layout.%0A%20%20%20%20%20%20%20%20_rank%20%3D%20%5BNone%5D%20*%20(_depth%20%2B%201)%0A%20%20%20%20%20%20%20%20_rank%5B_depth%5D%20%3D%20list(range(_two_n))%0A%20%20%20%20%20%20%20%20for%20_g%20in%20range(_depth%20-%201%2C%20-1%2C%20-1)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20_order%20%3D%20sorted(range(_two_n)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20key%3Dlambda%20i%2C%20g%3D_g%3A%20(_rank%5Bg%20%2B%201%5D%5B_parents%5Bg%5D%5Bi%5D%5D%2C%20i))%0A%20%20%20%20%20%20%20%20%20%20%20%20_rank%5B_g%5D%20%3D%20%5B0%5D%20*%20_two_n%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20_place%2C%20_i%20in%20enumerate(_order)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_rank%5B_g%5D%5B_i%5D%20%3D%20_place%0A%20%20%20%20%20%20%20%20_draw_genealogy(_axes%5B1%5D%2C%20lambda%20g%2C%20i%3A%20_rank%5Bg%5D%5Bi%5D)%0A%0A%20%20%20%20%20%20%20%20%23%20Panel%203%3A%20the%20coalescent%20tree%2C%20just%20the%20two%20sampled%20copies%20joining%0A%20%20%20%20%20%20%20%20%23%20at%20their%20MRCA%2C%20with%20the%20MRCA's%20lineage%20continuing%20a%20little%20further.%0A%20%20%20%20%20%20%20%20_ax%20%3D%20_axes%5B2%5D%0A%20%20%20%20%20%20%20%20_left%2C%20_right%2C%20_mid%20%3D%200%2C%20_two_n%20-%201%2C%20(_two_n%20-%201)%20%2F%202%0A%20%20%20%20%20%20%20%20for%20_x0%20in%20(_left%2C%20_right)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20_ax.plot(%5B_x0%2C%20_mid%5D%2C%20%5B0%2C%20-_depth%5D%2C%20color%3D_blue%2C%20linewidth%3D2)%0A%20%20%20%20%20%20%20%20_ax.plot(%5B_mid%2C%20_mid%5D%2C%20%5B-_depth%2C%20-_depth%20-%200.6%5D%2C%20color%3D_blue%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20linewidth%3D2)%0A%20%20%20%20%20%20%20%20_ax.plot(%5B_left%2C%20_right%5D%2C%20%5B0%2C%200%5D%2C%20%22o%22%2C%20color%3D_blue%2C%20markersize%3D6%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zorder%3D4%2C%20linestyle%3D%22none%22)%0A%20%20%20%20%20%20%20%20for%20_x0%2C%20_p%20in%20((_left%2C%20_picks%5B0%5D)%2C%20(_right%2C%20_picks%5B1%5D))%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20_ax.annotate(str(_p%20%2B%201)%2C%20(_x0%2C%200)%2C%20xytext%3D(0%2C%207)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20textcoords%3D%22offset%20points%22%2C%20ha%3D%22center%22%2C%20fontsize%3D8%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20color%3D_blue%2C%20fontweight%3D%22bold%22)%0A%20%20%20%20%20%20%20%20_ax.plot(_mid%2C%20-_depth%2C%20%22o%22%2C%20color%3D%22%2333302c%22%2C%20markersize%3D7%2C%20zorder%3D5)%0A%20%20%20%20%20%20%20%20_ax.annotate(f%22MRCA%2C%20%7B_depth%7D%20generation%7B's'%20if%20_depth%20!%3D%201%20else%20''%7D%20ago%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20(_mid%2C%20-_depth)%2C%20xytext%3D(8%2C%200)%2C%20textcoords%3D%22offset%20points%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20fontsize%3D9%2C%20va%3D%22center%22%2C%20color%3D%22%2333302c%22)%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20_hint%20%3D%20(%22revealed%20when%20the%5Cntwo%20lineages%20meet%22%20if%20len(_picks)%20%3D%3D%202%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20else%20%22pick%20two%20copies%2C%5Cnthen%20step%20back%22)%0A%20%20%20%20%20%20%20%20for%20_a%20in%20_axes%5B1%3A%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20_a.text(0.5%2C%200.5%2C%20_hint%2C%20transform%3D_a.transAxes%2C%20ha%3D%22center%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20va%3D%22center%22%2C%20fontsize%3D10%2C%20color%3D_grey%2C%20style%3D%22italic%22)%0A%20%20%20%20_axes%5B1%5D.set_title(%22sorted%20genealogy%22%2C%20pad%3D14)%0A%20%20%20%20_axes%5B2%5D.set_title(%22coalescent%20tree%22%2C%20pad%3D14)%0A%0A%20%20%20%20_step%20%3D%202%20if%20_rows%20%3C%3D%2012%20else%20max(2%2C%20round(_rows%20%2F%206%20%2F%202)%20*%202)%0A%20%20%20%20for%20_a%20in%20_axes%3A%0A%20%20%20%20%20%20%20%20_a.set_xlim(-0.6%2C%20_two_n%20-%200.4)%0A%20%20%20%20%20%20%20%20_a.set_xticks(%5B%5D)%0A%20%20%20%20%20%20%20%20_a.tick_params(axis%3D%22y%22%2C%20length%3D0)%0A%20%20%20%20%20%20%20%20for%20_side%20in%20(%22top%22%2C%20%22right%22%2C%20%22bottom%22%2C%20%22left%22)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20_a.spines%5B_side%5D.set_visible(False)%0A%20%20%20%20_axes%5B0%5D.set_ylim(-_rows%20-%200.8%2C%200.6)%0A%20%20%20%20_axes%5B0%5D.set_yticks(range(0%2C%20-_rows%20-%201%2C%20-_step))%0A%20%20%20%20_axes%5B0%5D.set_ylabel(%22generation%20(0%20%3D%20today)%22)%0A%20%20%20%20_fig.tight_layout()%0A%20%20%20%20_fig%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.accordion(%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%F0%9F%94%8E%20**What%20is%20going%20on%3F**%20(try%20it%20first!)%22%3A%20mo.md(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20**Any%20two%20gene%20copies%20share%20an%20ancestor%2C%20and%20in%20a%20small%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20population%20that%20ancestor%20is%20recent.**%20Each%20step%20back%2C%20your%20two%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20lineages%20each%20pick%20a%20parent%20from%20the%202N%20copies%2C%20so%20they%20pick%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20the%20**same**%20parent%20with%20probability%20%24%5Cfrac%7B1%7D%7B2N%7D%24.%20That%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20makes%20the%20wait%20until%20they%20coalesce%20about%20**2N%20generations**%20on%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20average%2C%20but%20very%20variable%3A%20sometimes%20the%20two%20copies%20are%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20siblings%2C%20sometimes%20it%20takes%20several%20times%20longer.%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20**Bigger%20populations%2C%20older%20ancestors.**%20The%20chance%20of%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20meeting%20each%20generation%20is%20%24%5Cfrac%7B1%7D%7B2N%7D%24%2C%20so%20doubling%20the%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20population%20doubles%20the%20typical%20wait.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20**Most%20copies%20leave%20no%20descendants.**%20In%20the%20sorted%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20genealogy%2C%20follow%20lines%20up%20from%20the%20bottom%3A%20many%20copies%20in%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20each%20past%20generation%20have%20no%20line%20reaching%20today.%20Their%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20lineages%20died%20out%20by%20chance.%20That%20is%20drift%2C%20the%20same%20thing%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20the%20Wright%E2%80%93Fisher%20demo%20shows%20forwards%20in%20time.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20-%20**The%20coalescent%20tree%20ignores%20everyone%20else.**%20The%20red%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20lines%20are%20the%20whole%20population's%20history%2C%20which%20we%20never%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20observe.%20The%20tree%20on%20the%20right%20is%20all%20the%20two%20copies'%20DNA%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20can%20tell%20us%20about%2C%20and%20its%20depth%20carries%20information%20about%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20the%20population's%20size.%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20**The%20connection%20to%20drift.**%20Forward%20in%20time%2C%20drift%20means%20some%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20gene%20copies%20leave%20many%20descendants%20and%20others%20none%3B%20backward%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20in%20time%2C%20the%20same%20randomness%20makes%20lineages%20run%20into%20each%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20other.%20Both%20happen%20faster%20in%20small%20populations%2C%20and%20both%20are%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20governed%20by%20the%20*effective*%20population%20size%20%24N_e%24%2C%20which%20is%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20why%20the%20depth%20of%20real%20gene%20trees%20is%20used%20to%20estimate%20it.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%0A%20%20%20%20plt.rcParams%5B%22figure.dpi%22%5D%20%3D%20120%0A%0A%20%20%20%20%23%20Kept%20small%20so%20every%20gene%20copy%20of%20every%20generation%20can%20be%20drawn.%0A%20%20%20%20MAX_N%20%3D%2010%0A%20%20%20%20DEFAULT_N%20%3D%203%0A%0A%20%20%20%20%23%20Vertical%20room%20reserved%20in%20the%20plot%2C%20in%20generations%2C%20so%20it%20does%20not%0A%20%20%20%20%23%20rescale%20with%20every%20step%20until%20the%20trace%20goes%20deeper%20than%20this.%0A%20%20%20%20MIN_ROWS%20%3D%2010%0A%0A%20%20%20%20%23%20Deliberately%20unseeded%3A%20every%20student%20should%20get%20their%20own%20histories.%0A%20%20%20%20rng%20%3D%20np.random.default_rng()%0A%20%20%20%20return%20DEFAULT_N%2C%20MAX_N%2C%20MIN_ROWS%2C%20mo%2C%20plt%2C%20rng%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "cwd": "",
+            "lspWorkspace": null,
+            "mode": "read",
+            "version": "0.23.2",
+            "serverToken": "unused",
+            "config": {"ai": {"custom_providers": {}, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "pip"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "show_tracebacks": false, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "medium"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

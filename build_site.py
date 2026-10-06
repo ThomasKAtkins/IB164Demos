@@ -94,6 +94,31 @@ LABS = [
                  "invisible until the environment changes."),
         ],
     ),
+    (
+        "Lab 6",
+        "Population Genetics",
+        [
+            Demo("lab6/_wright_fisher_app", "wright_fisher.html",
+                 "The Wright–Fisher Model",
+                 "Genetic drift in a finite population: allele frequencies "
+                 "wander by chance until one allele is fixed and the other "
+                 "lost."),
+            Demo("lab6/_molecular_evolution_app", "molecular_evolution.html",
+                 "Differences as a Clock",
+                 "Two copies of one DNA sequence mutate apart. Count the "
+                 "differences and estimate how long ago they split."),
+            Demo("lab6/_coalescent_app", "coalescent.html",
+                 "The Coalescent",
+                 "Trace a sample of genes back in time until they meet in a "
+                 "common ancestor, and see how far back that is in small "
+                 "and large populations."),
+            Demo("lab6/_genetic_diversity_app", "genetic_diversity.html",
+                 "How Much Variation? θ = 4Nμ",
+                 "Mutation adds variation and drift removes it. Run a "
+                 "population forward in time, then estimate θ from a sample "
+                 "using Tajima's π."),
+        ],
+    ),
 ]
 
 ALL_DEMOS = [d for _, _, demos in LABS for d in demos]
