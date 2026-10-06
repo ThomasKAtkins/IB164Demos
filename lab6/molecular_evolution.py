@@ -13,9 +13,10 @@ def _(mo):
     they carry **the same DNA sequence**, L = 1000 bases long. From then on, each lineage collects
     its own random mutations, and the two sequences drift apart.
 
-    In this model, every generation each site in each lineage mutates with
-    probability **μ** (the mutation rate per site per generation), changing
-    to one of the other three bases. As in class, mutation is rare enough
+    In this model, each lineage gains on average **μ** new mutations per
+    generation across its whole sequence (μ is the mutation rate **per
+    genome** per generation). Each mutation lands on a random site and
+    changes it to one of the other three bases. As in class, mutation is rare enough
     that **no site is ever hit twice**, so every mutation leaves a visible
     difference.
 
@@ -36,8 +37,8 @@ def _(DEFAULTS, mo, on_new_ancestor, on_run):
     # This cell must not read the simulation state: re-running a cell that
     # creates UI elements resets them, so a click would wipe the sliders.
     mu_slider = mo.ui.slider(
-        start=0.000001, stop=0.0001, step=0.000001, value=DEFAULTS["mu"],
-        include_input=True, label="Mutation rate **μ** (per site per generation)",
+        start=0.001, stop=0.1, step=0.001, value=DEFAULTS["mu"],
+        include_input=True, label="Mutation rate **μ** (per genome per generation)",
     )
     gens_slider = mo.ui.slider(
         start=1, stop=1000, step=1, value=DEFAULTS["generations"],
@@ -77,25 +78,28 @@ def _(np, rng):
         return rng.integers(0, 4, size=length).tolist()
 
     def simulate(ancestor, mu, generations):
+        # mu is the PER-GENOME rate: expected new mutations per lineage per
+        # generation across the whole sequence. Spread evenly over L sites,
+        # that is a per-site chance of mu / L each generation.
         # Two identical copies of the ancestor, then mutation in each lineage
         # independently. All randomness is drawn HERE, inside the click
         # handler, and frozen into state -- drawing in a reactive cell would
         # silently re-roll on every re-render.
         #
         # The model: each generation, each site in each lineage mutates with
-        # probability mu, to one of the other three bases, and no site ever
+        # probability mu / L, to one of the other three bases, and no site ever
         # mutates twice (the infinite-sites assumption) -- once a site has
         # mutated in EITHER lineage it is used up.
         #
         # Rather than loop over every generation, draw directly the
         # generation of each site's first mutation in each lineage: with a
-        # per-generation chance mu, that waiting time is Geometric(mu). A site
+        # per-generation chance p = mu / L, that waiting time is Geometric(p). A site
         # ends up mutated if the earlier of its two waiting times falls within
         # the run, and it belongs to whichever lineage got there first (ties
         # go to lineage 1, as if it mutated first that generation). This is
         # exactly the generation-by-generation process, just without the loop.
         n_sites = len(ancestor)
-        first_hit = rng.geometric(mu, size=(2, n_sites))
+        first_hit = rng.geometric(mu / n_sites, size=(2, n_sites))
         mutated = first_hit.min(axis=0) <= generations
         # owner[i] = which lineage (0 or 1) mutated site i, or -1 if neither.
         owner = np.where(mutated, first_hit.argmin(axis=0), -1)
@@ -276,8 +280,8 @@ def _(get_sim, mo):
         _n = len(_res["a"])
         _d = _res["n_diff"]
 
-        # Only the observed count is shown. The expected D (2*mu*L*t) and the
-        # clock estimate of t (D / 2*mu*L) are deliberately left for students
+        # Only the observed count is shown. The expected D (2*mu*t) and the
+        # clock estimate of t (D / 2*mu) are deliberately left for students
         # to work out.
 
         # The no-double-hits assumption needs mutated sites to be a small
@@ -334,19 +338,18 @@ def _(mo):
             "🔎 **What is going on?** (run it a few times first!)": mo.md(
                 r"""
                 **Differences between sequences are a clock.** Each lineage
-                gains mutations at a rate of $\mu$ per site per generation,
-                so across a sequence of $L$ sites it gains about $\mu L$
-                mutations per generation. There are **two** lineages, each
+                gains about $\mu$ new mutations per generation ($\mu$ is the
+                rate per genome). There are **two** lineages, each
                 mutating independently since the split, so after $t$
                 generations the expected number of differences is
 
-                $$E[D] = 2\mu L t.$$
+                $$E[D] = 2\mu t.$$
 
                 Because no site mutates twice, every mutation shows up as
                 exactly one difference, and nothing is ever hidden. Turn this
                 around and you can read time off the sequences:
 
-                $$\hat{t} = \frac{D}{2\mu L}.$$
+                $$\hat{t} = \frac{D}{2\mu}.$$
 
                 This is the **molecular clock**. Note the factor of 2: the
                 differences between two species measure the time back to their
@@ -354,7 +357,7 @@ def _(mo):
 
                 **The clock ticks randomly.** Press Run several times with the
                 same settings. $D$ changes from run to run (it is roughly
-                Poisson, so its spread is about $\sqrt{2\mu L t}$), and so does
+                Poisson, so its spread is about $\sqrt{2\mu t}$), and so does
                 the estimate of $t$. Short times, with only a few
                 differences, give especially noisy clocks.
 
@@ -367,10 +370,12 @@ def _(mo):
                 - Tick *Show the common ancestor*. In real data we almost
                   never have the ancestor, so we see that two sequences differ
                   but not which lineage changed.
-                - Real mutation rates are about $10^{-8}$ per site per
-                  generation, far below these sliders, which is why the "no
-                  site mutates twice" assumption is reasonable for closely
-                  related species.
+                - Real genomes are far bigger than 1000 bases: a human child
+                  carries roughly 60 new mutations that neither parent had.
+                  Spread over the billions of sites in a genome, though, that
+                  is only about $10^{-8}$ per site, which is why the "no site
+                  mutates twice" assumption is reasonable for closely related
+                  species.
                 """
             )
         }
@@ -384,12 +389,11 @@ def _():
     import numpy as np
 
     # The sequence length is fixed (no slider) at 1000 bases. About
-    # 2 * mu * L * t = 20 differences at the defaults. Generations are
-    # capped at 1000 so that 2 * mu * t stays small (at most 0.2, at the
-    # highest mu): only then is D / (2 * mu * L) a good estimate of t. The
-    # sequence is long so that a small 2 * mu * t still gives visible
-    # differences.
-    DEFAULTS = {"length": 1000, "mu": 0.00001, "generations": 1000}
+    # 2 * mu * t = 20 differences at the defaults (mu is per genome).
+    # Generations are capped at 1000 so the fraction of sites mutated,
+    # 2 * mu * t / L, stays small (at most 0.2, at the highest mu): only
+    # then is D / (2 * mu) a good estimate of t.
+    DEFAULTS = {"length": 1000, "mu": 0.01, "generations": 1000}
 
     # Deliberately unseeded: every student should get their own mutations.
     rng = np.random.default_rng()
