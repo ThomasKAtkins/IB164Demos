@@ -23,6 +23,11 @@ lab1/  binomial_distribution.py, binomial_hypothesis_separation.py
 lab2/  monty_hall.py
 lab3/  GWAS report generator (NOT published — see below)
 lab4/  peppered_moth.py, helminth_mismatch.py, ccr5_cryptic_variation.py
+lab6/  wright_fisher.py, molecular_evolution.py, coalescent.py,
+       genetic_diversity.py
+lab7/  shotgun_assembly.py, repeats_long_reads.py, genotyping.py
+       texts.txt (the texts the lab 7 demos use - edit freely), then run
+       rebuild_lab7.bat, which embeds them and re-exports all three
 
 build_site.py     builds docs/ from the marimo exports
 docs/             the built site; GitHub Pages serves this folder

@@ -119,6 +119,27 @@ LABS = [
                  "using Tajima's π."),
         ],
     ),
+    (
+        "Lab 7",
+        "Genome Assembly and Genotyping",
+        [
+            # Texts come from lab7/texts.txt; rebuild with
+            # lab7/rebuild_lab7.bat after editing it.
+            Demo("lab7/_shotgun_assembly_app", "shotgun_assembly.html",
+                 "Putting the Pieces Back Together",
+                 "A text shredded into overlapping reads. Assemble it by hand, "
+                 "then watch a greedy assembler have a go."),
+            Demo("lab7/_repeats_long_reads_app", "repeats_long_reads.html",
+                 "Repeats, and Why Long Reads Help",
+                 "Repeated text fools assemblers. See why, as a de Bruijn "
+                 "graph, then compare short accurate reads with long noisy "
+                 "ones."),
+            Demo("lab7/_genotyping_app", "genotyping.html",
+                 "Calling Genotypes from Reads",
+                 "Map reads to a reference and call each variant 0/1 or 1/1. "
+                 "Can you tell real variants from sequencing errors?"),
+        ],
+    ),
 ]
 
 ALL_DEMOS = [d for _, _, demos in LABS for d in demos]

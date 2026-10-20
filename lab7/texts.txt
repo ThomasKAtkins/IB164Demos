@@ -1,0 +1,135 @@
+# Texts for the Lab 7 demos.
+#
+# After editing this file, run lab7\rebuild_lab7.bat (or, by hand,
+# `py -3.10 lab7/embed_texts.py`) so the demos pick up the change. The demos
+# never read this file directly - the embed step copies the texts into each
+# notebook, which is what lets them run in the browser.
+#
+# FORMAT
+#   Lines starting with # are comments.
+#
+#   === Title shown in the "Choose a text" dropdown
+#   kind: general            general = assembly and genotyping demos
+#                            repeat  = the repeats / long-reads demo; choose
+#                                      texts with long word-for-word repeats
+#                                      (choruses, refrains, cumulative rhymes)
+#   puzzle: One sentence     optional. The hand-assembly puzzle sentence,
+#                            about 100-150 characters. Default: the start of
+#                            the passage.
+#   variants: old>new, ...   optional. Word changes for the genotyping demo,
+#                            each a ONE-letter change to a word in the first
+#                            ~300 characters of the passage. Default: random
+#                            letter changes.
+#   ---
+#   The passage itself, on as many lines as you like. Line breaks and blank
+#   lines become single spaces. It runs until the next === line.
+#
+# LENGTHS: general passages should be at least 600 characters (the assembly
+# demo uses the first ~600). Repeat passages work best at 400-1,200 characters.
+# embed_texts.py warns about anything that will not work well.
+
+
+=== On the Origin of Species
+kind: general
+puzzle: There is grandeur in this view of life, with its several powers, having been originally breathed into a few forms or into one.
+variants: bank>band, kinds>kings, birds>bards, bushes>pushes, worms>words, damp>camp, forms>firms, plants>planes
+---
+It is interesting to contemplate an entangled bank, clothed with many plants
+of many kinds, with birds singing on the bushes, with various insects flitting
+about, and with worms crawling through the damp earth, and to reflect that
+these elaborately constructed forms, so different from each other, and
+dependent on each other in so complex a manner, have all been produced by laws
+acting around us. These laws, taken in the highest sense, being Growth with
+Reproduction; Inheritance which is almost implied by reproduction; Variability
+from the indirect and direct action of the external conditions of life, and
+from use and disuse; a Ratio of Increase so high as to lead to a Struggle for
+Life, and as a consequence to Natural Selection, entailing Divergence of
+Character and the Extinction of less-improved forms. Thus, from the war of
+nature, from famine and death, the most exalted object which we are capable of
+conceiving, namely, the production of the higher animals, directly follows.
+There is grandeur in this view of life, with its several powers, having been
+originally breathed into a few forms or into one; and that, whilst this planet
+has gone cycling on according to the fixed law of gravity, from so simple a
+beginning endless forms most beautiful and most wonderful have been, and are
+being, evolved.
+
+=== Star Wars
+kind: general
+puzzle: Pursued by the Empire's sinister agents, Princess Leia races home aboard her starship, custodian of the stolen plans that can save her people and restore freedom to the galaxy....
+variants: civil>cavil, war>bar, from>frog, base>bare, won>win, battle>bottle, spies>skies, steal>steel, plans>plant
+---
+It is a period of civil war. Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire.
+During the battle, Rebel spies managed to steal secret plans to the Empire's ultimate weapon, the DEATH STAR, an armored space station with enough power to destroy an entire planet.
+Pursued by the Empire's sinister agents, Princess Leia races home aboard her starship, custodian of the stolen plans that can save her people and restore freedom to the galaxy....
+
+=== The First Human Genome Paper
+kind: general
+puzzle: The human genome holds an extraordinary trove of information about human development, physiology, medicine and evolution.
+variants: holds>folds, trove>grove, about>above, report>resort, make>made, draft>drift
+---
+The human genome holds an extraordinary trove of information about human development, physiology, medicine and evolution. Here we report the results of an international collaboration to produce and make freely available a draft sequence of the human genome. We also present an initial analysis of the data, describing some of the insights that can be gleaned from the sequence. The rediscovery of Mendel's laws of heredity in the opening weeks of the 20th century sparked a scientific quest to understand the nature and content of genetic information that has propelled biology for the last hundred years. The scientific progress made falls naturally into four main phases, corresponding roughly to the four quarters of the century. The first established the cellular basis of heredity: the chromosomes. The second defined the molecular basis of heredity: the DNA double helix. The third unlocked the informational basis of heredity, with the discovery of the biological mechanism by which cells read the information contained in genes and with the invention of the recombinant DNA technologies of cloning and sequencing by which scientists can do the same.
+
+=== Pink Pony Inn
+kind: repeat
+---
+I have these wicked dreams of leaving Annecy
+Oh Saint Cecelia, I swear she calleth me
+Shan’t make my mother proud, the thought is too obscene
+To see her darling girl, I know that she shall scream
+Lord, what hast thou done?
+Thou’rt a pink pony maid
+Thou shouldst be a nun
+Oh mother, I just want to run
+With the mummers and clowns
+‘Tis where I belong, down at the
+Pink Pony Inn, I shall keep on dancing at the
+Pink Pony Inn, I shall keep on dancing, let them
+Call it a sin, I shall keep on dancing at the
+Pink Pony Inn, Pink Pony Inn
+Barefoot, I spin upon the floor
+Ale and mead aplenty, and a sign above the door
+Firelight, and a boar’s head on the wall
+Every night a new reminder why I left it all
+
+=== Galileo Figaro
+kind: repeat
+---
+I see a little silhouetto of a man
+Scaramouche, Scaramouche, will you do the Fandango?
+Thunderbolt and lightning, very, very frightening me
+Galileo Galileo Galileo Galileo Galileo Figaro, magnifico
+But I'm just a poor boy, nobody loves me
+He's just a poor boy from a poor family
+Spare him his life from this monstrosity
+Easy come, easy go, will you let me go?
+No, we will not let you go, let him go
+We will not let you go, let him go
+We will not let you go, let me go
+Will not let you go, let me go
+Will not let you go never, never, never, never let me go
+No, no, no, no, no, no, no
+Oh, mamma mia, mamma mia
+Mamma mia, let me go
+
+=== Tell Me What You Want
+kind: repeat
+---
+Yo, I'll tell you what I want, what I really, really want
+So tell me what you want, what you really, really want
+I'll tell you what I want, what I really, really want
+So tell me what you want, what you really, really want
+I wanna, (ha) I wanna, (ha) I wanna, (ha) I wanna, (ha)
+I wanna really, really, really wanna zigazig ah
+If you want my future, forget my past
+If you wanna get with me, better make it fast
+Now don't go wasting my precious time
+Get your act together we could be just fine
+I'll tell you what I want, what I really, really want
+So tell me what you want, what you really, really want
+I wanna, (ha) I wanna, (ha) I wanna, (ha) I wanna, (ha)
+I wanna really, really, really wanna zigazig ah
+If you wanna be my lover, you gotta get with my friends
+(Gotta get with my friends)
+Make it last forever, friendship never ends
+If you wanna be my lover, you have got to give
+Taking is too easy, but that's the way it is

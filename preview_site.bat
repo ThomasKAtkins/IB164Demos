@@ -24,8 +24,7 @@ echo Leave this window open while you look at the site.
 echo Close it (or press Ctrl+C) when you are done.
 echo.
 
-cd /d "%~dp0docs"
 start "" cmd /c "timeout /t 2 >nul & start "" "%URL%""
-py -3.10 -m http.server %PORT%
+py -3.10 preview_server.py %PORT%
 
 endlocal
